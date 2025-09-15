@@ -1,0 +1,351 @@
+--------------------------------------------------------
+-- Archivo creado  - martes-septiembre-09-2025   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table ALMACEN
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."ALMACEN" 
+   (	"ID" NUMBER, 
+	"COLUMN1" VARCHAR2(20 BYTE), 
+	"NOMBRE" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table CATEGORIA
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."CATEGORIA" 
+   (	"ID" NUMBER, 
+	"NOMBRE" VARCHAR2(100 BYTE), 
+	"DESCRIPCION" CLOB
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" 
+ LOB ("DESCRIPCION") STORE AS SECUREFILE (
+  TABLESPACE "USERS" ENABLE STORAGE IN ROW 4000 CHUNK 8192
+  NOCACHE LOGGING  NOCOMPRESS  KEEP_DUPLICATES ) ;
+--------------------------------------------------------
+--  DDL for Table GARANTIA
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."GARANTIA" 
+   (	"ID" NUMBER, 
+	"PRODUCTO_ID" NUMBER, 
+	"TIEMPO_GARANTIA" NUMBER, 
+	"CONDICIONES" CLOB
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" 
+ LOB ("CONDICIONES") STORE AS SECUREFILE (
+  TABLESPACE "USERS" ENABLE STORAGE IN ROW 4000 CHUNK 8192
+  NOCACHE LOGGING  NOCOMPRESS  KEEP_DUPLICATES ) ;
+--------------------------------------------------------
+--  DDL for Table LOTE
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."LOTE" 
+   (	"ID" NUMBER, 
+	"NUMERO_LOTE" VARCHAR2(20 BYTE), 
+	"FECHA_INGRESO" DATE, 
+	"FECHA_VENCIMIENTO" DATE
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table MOVIMIENTOINVENTARIO
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."MOVIMIENTOINVENTARIO" 
+   (	"ID" NUMBER, 
+	"TIPOMOVIMIENTO" VARCHAR2(20 BYTE), 
+	"CANTIDAD" NUMBER, 
+	"FECHA_INVENTARIO" DATE DEFAULT SYSDATE, 
+	"PRODUCTO_ID" NUMBER, 
+	"SUCURSAL_ID" NUMBER, 
+	"USUARIO_ID" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCTO
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."PRODUCTO" 
+   (	"ID" NUMBER, 
+	"NOMBRE" VARCHAR2(100 BYTE), 
+	"DESCRIPCION" CLOB, 
+	"PRECIO" NUMBER(10,2), 
+	"CATEGORIA_ID" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" 
+ LOB ("DESCRIPCION") STORE AS SECUREFILE (
+  TABLESPACE "USERS" ENABLE STORAGE IN ROW 4000 CHUNK 8192
+  NOCACHE LOGGING  NOCOMPRESS  KEEP_DUPLICATES ) ;
+--------------------------------------------------------
+--  DDL for Table PRODUCTO_PROVEEDOR
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."PRODUCTO_PROVEEDOR" 
+   (	"ID" NUMBER, 
+	"PRODUCTO_ID" NUMBER, 
+	"PROVEDOR_ID" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table PROVEEDOR
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."PROVEEDOR" 
+   (	"ID" NUMBER, 
+	"NOMBRE" VARCHAR2(100 BYTE), 
+	"CONTACTO" VARCHAR2(100 BYTE), 
+	"TELEFONO" VARCHAR2(20 BYTE), 
+	"DIRECCION" CLOB
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" 
+ LOB ("DIRECCION") STORE AS SECUREFILE (
+  TABLESPACE "USERS" ENABLE STORAGE IN ROW 4000 CHUNK 8192
+  NOCACHE LOGGING  NOCOMPRESS  KEEP_DUPLICATES ) ;
+--------------------------------------------------------
+--  DDL for Table STOCKSUCURSAL
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."STOCKSUCURSAL" 
+   (	"ID" NUMBER, 
+	"CANTIDAD" VARCHAR2(20 BYTE), 
+	"PRODUCTO_ID" NUMBER, 
+	"SUCURSAL_ID" NUMBER, 
+	"UBICACION_ID" NUMBER, 
+	"LOTE_ID" NUMBER
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table SUCURSAL
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."SUCURSAL" 
+   (	"ID" NUMBER, 
+	"NOMBRE" VARCHAR2(100 BYTE), 
+	"DIRECCION" CLOB, 
+	"TELFONO" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" 
+ LOB ("DIRECCION") STORE AS SECUREFILE (
+  TABLESPACE "USERS" ENABLE STORAGE IN ROW 4000 CHUNK 8192
+  NOCACHE LOGGING  NOCOMPRESS  KEEP_DUPLICATES ) ;
+--------------------------------------------------------
+--  DDL for Table UBICACION
+--------------------------------------------------------
+
+  CREATE TABLE "INVENTARIO_SUCURSAL"."UBICACION" 
+   (	"ID" NUMBER, 
+	"PASILLO" VARCHAR2(100 BYTE), 
+	"ESTANTE" VARCHAR2(20 BYTE), 
+	"NIVEL" VARCHAR2(20 BYTE), 
+	"ALMACEN_ID" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+REM INSERTING into INVENTARIO_SUCURSAL.ALMACEN
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.CATEGORIA
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.GARANTIA
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.LOTE
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.MOVIMIENTOINVENTARIO
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.PRODUCTO
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.PRODUCTO_PROVEEDOR
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.PROVEEDOR
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.STOCKSUCURSAL
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.SUCURSAL
+SET DEFINE OFF;
+REM INSERTING into INVENTARIO_SUCURSAL.UBICACION
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index PRODUCTO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."PRODUCTO_PK" ON "INVENTARIO_SUCURSAL"."PRODUCTO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index UBICACION_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."UBICACION_PK" ON "INVENTARIO_SUCURSAL"."UBICACION" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index CATEGORIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."CATEGORIA_PK" ON "INVENTARIO_SUCURSAL"."CATEGORIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index LOTE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."LOTE_PK" ON "INVENTARIO_SUCURSAL"."LOTE" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SUCURSAL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."SUCURSAL_PK" ON "INVENTARIO_SUCURSAL"."SUCURSAL" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index ALMACEN_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."ALMACEN_PK" ON "INVENTARIO_SUCURSAL"."ALMACEN" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index GARANTIA_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."GARANTIA_PK" ON "INVENTARIO_SUCURSAL"."GARANTIA" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index MOVIMIENTOINVENTARIO_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."MOVIMIENTOINVENTARIO_PK" ON "INVENTARIO_SUCURSAL"."MOVIMIENTOINVENTARIO" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index PROVEEDOR_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."PROVEEDOR_PK" ON "INVENTARIO_SUCURSAL"."PROVEEDOR" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index STOCKSUCURSAL_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."STOCKSUCURSAL_PK" ON "INVENTARIO_SUCURSAL"."STOCKSUCURSAL" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index PRODUCTO_PROVEEDOR_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "INVENTARIO_SUCURSAL"."PRODUCTO_PROVEEDOR_PK" ON "INVENTARIO_SUCURSAL"."PRODUCTO_PROVEEDOR" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table PRODUCTO_PROVEEDOR
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."PRODUCTO_PROVEEDOR" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."PRODUCTO_PROVEEDOR" ADD CONSTRAINT "PRODUCTO_PROVEEDOR_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ALMACEN
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."ALMACEN" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."ALMACEN" ADD CONSTRAINT "ALMACEN_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table LOTE
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."LOTE" MODIFY ("NUMERO_LOTE" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."LOTE" ADD CONSTRAINT "LOTE_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table STOCKSUCURSAL
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."STOCKSUCURSAL" ADD CONSTRAINT "STOCKSUCURSAL_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRODUCTO
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."PRODUCTO" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."PRODUCTO" ADD CONSTRAINT "PRODUCTO_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table CATEGORIA
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."CATEGORIA" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."CATEGORIA" ADD CONSTRAINT "CATEGORIA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table GARANTIA
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."GARANTIA" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."GARANTIA" ADD CONSTRAINT "GARANTIA_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table MOVIMIENTOINVENTARIO
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."MOVIMIENTOINVENTARIO" MODIFY ("CANTIDAD" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."MOVIMIENTOINVENTARIO" ADD CONSTRAINT "MOVIMIENTOINVENTARIO_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table UBICACION
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."UBICACION" ADD CONSTRAINT "UBICACION_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PROVEEDOR
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."PROVEEDOR" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."PROVEEDOR" ADD CONSTRAINT "PROVEEDOR_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SUCURSAL
+--------------------------------------------------------
+
+  ALTER TABLE "INVENTARIO_SUCURSAL"."SUCURSAL" MODIFY ("NOMBRE" NOT NULL ENABLE);
+  ALTER TABLE "INVENTARIO_SUCURSAL"."SUCURSAL" ADD CONSTRAINT "SUCURSAL_PK" PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
